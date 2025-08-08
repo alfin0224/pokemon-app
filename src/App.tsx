@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HomePage } from './features/layout/HomePage';
+import { HomePage } from './pages/HomePage';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Create a client

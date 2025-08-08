@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PokemonCard } from './PokemonCard';
-import { PokemonListSkeleton } from '../../components/Skeleton';
+import { PokemonListSkeleton } from '../../components/ui/Skeleton';
 import { QueryErrorFallback } from '../../components/ErrorBoundary';
 import { usePokemonList } from '../../hooks/usePokemonList';
 import type { PokemonCardData } from '../../types/pokemon';

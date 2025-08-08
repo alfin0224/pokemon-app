@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from './Header';
+import { Header } from '../layouts/Header';
 import { PokemonList } from '../features/pokemon/PokemonList';
 
 export const Layout: React.FC = () => {

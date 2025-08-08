@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { QueryErrorFallback } from '../../components/ErrorBoundary';
-import { Skeleton } from '../../components/Skeleton';
-import { usePokemonDetail } from '../../hooks/usePokemonDetail';
+import { QueryErrorFallback } from '../components/ErrorBoundary';
+import { Skeleton } from '../components/ui/Skeleton';
+import { usePokemonDetail } from '../hooks/usePokemonDetail';
 import {
   formatPokemonName,
   formatPokemonNumber,
@@ -11,7 +11,7 @@ import {
   formatStatName,
   formatHeight,
   formatWeight,
-} from '../../utils/formatters';
+} from '../utils/formatters';
 
 type TabType = 'about' | 'stats' | 'evolution' | 'moves';
 
