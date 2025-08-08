@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { QueryErrorFallback } from '../components/ErrorBoundary';
 import { Skeleton } from '../components/ui/Skeleton';
 import { usePokemonDetail } from '../hooks/usePokemonDetail';
+import { pokemonApi } from '../api/pokeapi';
 import {
   formatPokemonName,
   formatPokemonNumber,
@@ -200,7 +201,7 @@ export const PokemonDetailPage: React.FC = () => {
                 style={{ transform: 'translateY(40px)' }}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+                  target.src = pokemonApi.getPokemonFallbackImageUrl(pokemon.id);
                 }}
               />
             </div>

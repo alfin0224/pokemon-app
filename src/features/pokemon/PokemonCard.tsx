@@ -1,6 +1,7 @@
 import React from 'react';
 import type { PokemonCardData } from '../../types/pokemon';
 import { formatPokemonName, getPokemonTypeGradient } from '../../utils/formatters';
+import { pokemonApi } from '../../api/pokeapi';
 
 interface PokemonCardProps {
   pokemon: PokemonCardData;
@@ -69,7 +70,7 @@ export const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, onClick, isSe
             loading="lazy"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              target.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+              target.src = pokemonApi.getPokemonFallbackImageUrl(pokemon.id);
             }}
           />
         </div>

@@ -1,11 +1,14 @@
 import axios from 'axios';
 import type { PokemonListResponse, Pokemon } from '../types/pokemon';
 
-const API_BASE_URL = 'https://pokeapi.co/api/v2';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://pokeapi.co/api/v2';
+const API_TIMEOUT = parseInt(import.meta.env.VITE_API_TIMEOUT || '10000', 10);
+const POKEMON_SPRITE_BASE_URL = import.meta.env.VITE_POKEMON_SPRITE_BASE_URL || 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+const POKEMON_FALLBACK_SPRITE_URL = import.meta.env.VITE_POKEMON_FALLBACK_SPRITE_URL || 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: API_TIMEOUT,
 });
 
 export const pokemonApi = {
@@ -29,6 +32,11 @@ export const pokemonApi = {
 
   // Get Pokemon sprite URL
   getPokemonImageUrl: (id: number): string => {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+    return `${POKEMON_SPRITE_BASE_URL}/${id}.png`;
+  },
+
+  // Get Pokemon fallback sprite URL
+  getPokemonFallbackImageUrl: (id: number): string => {
+    return `${POKEMON_FALLBACK_SPRITE_URL}/${id}.png`;
   },
 };

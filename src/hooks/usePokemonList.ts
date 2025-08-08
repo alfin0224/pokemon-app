@@ -2,7 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { pokemonApi } from '../api/pokeapi';
 import type { PokemonCardData } from '../types/pokemon';
 
-export const usePokemonList = (page: number = 1, limit: number = 20) => {
+// Environment variables
+const DEFAULT_PAGE_SIZE = parseInt(import.meta.env.VITE_DEFAULT_PAGE_SIZE || '20', 10);
+const CACHE_STALE_TIME = parseInt(import.meta.env.VITE_CACHE_STALE_TIME || '5', 10) * 60 * 1000;
+const API_RETRY_COUNT = parseInt(import.meta.env.VITE_API_RETRY_COUNT || '3', 10);
+
+export const usePokemonList = (page: number = 1, limit: number = DEFAULT_PAGE_SIZE) => {
   const offset = (page - 1) * limit;
 
   return useQuery({
@@ -39,7 +44,7 @@ export const usePokemonList = (page: number = 1, limit: number = 20) => {
         results: pokemonDetails,
       };
     },
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: 3,
+    staleTime: CACHE_STALE_TIME,
+    retry: API_RETRY_COUNT,
   });
 };

@@ -2,6 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { pokemonApi } from '../api/pokeapi';
 import type { PokemonDetailData } from '../types/pokemon';
 
+// Environment variables
+const CACHE_STALE_TIME = parseInt(import.meta.env.VITE_CACHE_STALE_TIME || '5', 10) * 60 * 1000;
+const API_RETRY_COUNT = parseInt(import.meta.env.VITE_API_RETRY_COUNT || '3', 10);
+
 export const usePokemonDetail = (nameOrId: string | number | null) => {
   return useQuery({
     queryKey: ['pokemon-detail', nameOrId],
@@ -31,7 +35,7 @@ export const usePokemonDetail = (nameOrId: string | number | null) => {
       return pokemonDetail;
     },
     enabled: !!nameOrId,
-    staleTime: 1000 * 60 * 10, // 10 minutes
-    retry: 3,
+    staleTime: CACHE_STALE_TIME * 2, // Double the stale time for details (10 minutes if cache is 5)
+    retry: API_RETRY_COUNT,
   });
 };
